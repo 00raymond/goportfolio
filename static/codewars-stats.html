@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <title>Raymond House</title>
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        fetch('/codewars-stats-data')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display "honor" value
+                document.getElementById('honor').textContent = data.honor;
+
+                // Display "overall kyu" value
+                document.getElementById('completed').textContent = data.ranks.overall.name;
+                console.log(data.ranks.overall.name);
+                console.log(data.ranks);
+                console.log(data.ranks.overall);
+                document.getElementById('lbpos').textContent = data.leaderboardPosition;
+                document.getElementById('username').textContent = data.username;
+            })
+            .catch(error => {
+                console.error('Problem fetching data:', error);
+            });
+        });
+
+    </script>
+    <nav>
+      <div class="icon-container">
+        <a href="/static/resources/Raymond_House_resume.pdf" target="_blank">
+          <div class="hover-container">
+            <div class="hover-box">resume</div>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="https://github.com/00raymond" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/raymondbhouse/" target="_blank" class="github-icon"><i class="fab fa-linkedin"></i></a>
+          <a href="index.html" class="github-icon"><i class="fa-solid fa-id-card"></i></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section class="codewars-stats-section">
+        <div class="basic-stats">
+            <label>Username:</label>
+            <span id="username"></span>
+            <label>Honor:</label>
+            <span id="honor"></span>
+            <label>Kyu:</label>
+            <span id="completed"></span>
+            <label>Leaderboard Rank:</label>
+            <span id="lbpos"></span>
+        </div>
+        <div class="languages">
+            <ul>
+                <li>String 1</li>
+                <li>String 2</li>
+                <li>String 3</li>
+                <li>String 1</li>
+                <li>String 2</li>
+                <li>String 3</li>
+                <li>String 1</li>
+                <li>String 2</li>
+                <li>String 3</li>
+                <li>String 1</li>
+                <li>String 2</li>
+                <li>String 3</li>
+            </ul>
+        </div>
+      </section>
+    </main>
+</body>
+</html>
