@@ -27,7 +27,33 @@
                 document.getElementById('completed').textContent = data.ranks.overall.name;
                 console.log(data.ranks.overall.name);
                 console.log(data.ranks);
-                console.log(data.ranks.overall);
+                console.log(data.ranks.languages);
+                
+                let languageMap = new Map();
+
+                //create array of maps, which will hold: language name and rank for ordering
+
+                for (let language in data.ranks.languages) {
+                  languageMap.set(language, data.ranks.languages[language].rank);
+                }
+
+                let languagesArray = [...languageMap.entries()];
+
+                languagesArray.sort((a,b) => b[1] - a[1]);
+                let languageliststr = "";
+
+                const ulElement = document.getElementById("sortedLanguages");
+
+                for (let i = 0; i < languagesArray.length; i++) {
+                  console.log(languagesArray[i][0] + ": " + data.ranks.languages[languagesArray[i][0]].name);
+                  languageliststr = languagesArray[i][0] + ": " + data.ranks.languages[languagesArray[i][0]].name;
+
+                  let liElement = document.createElement("li");
+                  liElement.textContent = languageliststr;
+                  ulElement.appendChild(liElement);
+
+                }
+
                 document.getElementById('lbpos').textContent = data.leaderboardPosition;
                 document.getElementById('username').textContent = data.username;
             })
@@ -56,7 +82,8 @@
       <div class="stats-column">
         <div class="stats-title">
           <span class="iconify" data-icon="simple-icons:codewars" data-width="63" data-height="63" style="margin-top: 4px;" style="color: white;"></span>
-          <h3>      My CodeWars Stats</h3>
+          <h3>My CodeWars Stats</h3>
+          <p>(updates live)</p>
         </div>
       <section class="codewars-stats-section">
         <div class="basic-stats">
@@ -72,20 +99,7 @@
         <div class="languages">
           <h2>Languages:</h2>
           <div class="scrollable-list">
-            <ul>
-                <li>String 1</li>
-                <li>String 2</li>
-                <li>String 3</li>
-                <li>String 1</li>
-                <li>String 2</li>
-                <li>String 3</li>
-                <li>String 1</li>
-                <li>String 2</li>
-                <li>String 3</li>
-                <li>String 1</li>
-                <li>String 2</li>
-                <li>String 3</li>
-            </ul>
+            <ul id="sortedLanguages"></ul>
           </div>
         </div>
       </section>
